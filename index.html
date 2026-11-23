@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Tic Tac Toe</title>
+</head>
+
+<body>
+
+  <!-- New game menu start -->
+  <section class="menu" id="new-game-menu">
+    <div class="logo">
+      <img src="./starter-code/assets/icon-x.svg" alt="" class="logo__icon">
+      <img src="./starter-code/assets/icon-o.svg" alt="" class="logo__icon">
+    </div>
+    <div class="menu__player-setup">
+
+      <fieldset class="menu__mark-options">
+        <legend class="menu__title">
+          Pick player 1's mark
+        </legend>
+        <div class="menu__marks">
+          <label class="menu__mark" id="menu-mark-x">
+            <input type="radio" name="menu-mark" id="mark--x" class="menu__mark-input" aria-label="X">
+
+            <svg class="menu__mark-image" viewBox="0 0 64 64">
+              <path
+                d="M51.12 1.269c.511 0 1.023.195 1.414.586l9.611 9.611c.391.391.586.903.586 1.415s-.195 1.023-.586 1.414L44.441 32l17.704 17.705c.391.39.586.902.586 1.414 0 .512-.195 1.024-.586 1.415l-9.611 9.611c-.391.391-.903.586-1.415.586a1.994 1.994 0 0 1-1.414-.586L32 44.441 14.295 62.145c-.39.391-.902.586-1.414.586a1.994 1.994 0 0 1-1.415-.586l-9.611-9.611a1.994 1.994 0 0 1-.586-1.415c0-.512.195-1.023.586-1.414L19.559 32 1.855 14.295a1.994 1.994 0 0 1-.586-1.414c0-.512.195-1.024.586-1.415l9.611-9.611c.391-.391.903-.586 1.415-.586s1.023.195 1.414.586L32 19.559 49.705 1.855c.39-.391.902-.586 1.414-.586Z" />
+            </svg>
+          </label>
+          <label class="menu__mark menu__mark--selected" id="menu-mark-o">
+            <input type="radio" name="menu-mark" id="mark--o" class="menu__mark-input" aria-label="O" checked>
+
+            <svg class="menu__mark-image" viewBox="0 0 64 64">
+              <path
+                d="M33 1c17.673 0 32 14.327 32 32 0 17.673-14.327 32-32 32C15.327 65 1 50.673 1 33 1 15.327 15.327 1 33 1Zm0 18.963c-7.2 0-13.037 5.837-13.037 13.037 0 7.2 5.837 13.037 13.037 13.037 7.2 0 13.037-5.837 13.037-13.037 0-7.2-5.837-13.037-13.037-13.037Z" />
+            </svg>
+          </label>
+        </div>
+      </fieldset>
+      <p class="menu__hint">
+        Remember : X goes first
+      </p>
+    </div>
+
+    <div class="menu__game-modes">
+      <button type="button" class="menu__btn menu__btn--amber" id="new-game-cpu">New Game (vs CPU)</button>
+      <button type="button" class="menu__btn menu__btn--slate" id="new-game-player">New Game (vs player)</button>
+
+    </div>
+  </section>
+  <!-- New game menu end -->
+
+  <main>
+    <!-- Game board start -->
+    <div class="overlay hidden" id="overlay"></div>
+    <div class="game hidden" id="game">
+      <header class="game__header" id="game-header">
+
+        <div class="logo">
+          <img src="./starter-code/assets/icon-x.svg" alt="" class="logo__icon">
+          <img src="./starter-code/assets/icon-o.svg" alt="" class="logo__icon">
+        </div>
+
+        <div class="game__turn">
+          <svg class="menu__mark-image game__turn-img" id="x-turn-img" viewBox="0 0 64 64">
+            <path
+              d="M51.12 1.269c.511 0 1.023.195 1.414.586l9.611 9.611c.391.391.586.903.586 1.415s-.195 1.023-.586 1.414L44.441 32l17.704 17.705c.391.39.586.902.586 1.414 0 .512-.195 1.024-.586 1.415l-9.611 9.611c-.391.391-.903.586-1.415.586a1.994 1.994 0 0 1-1.414-.586L32 44.441 14.295 62.145c-.39.391-.902.586-1.414.586a1.994 1.994 0 0 1-1.415-.586l-9.611-9.611a1.994 1.994 0 0 1-.586-1.415c0-.512.195-1.023.586-1.414L19.559 32 1.855 14.295a1.994 1.994 0 0 1-.586-1.414c0-.512.195-1.024.586-1.415l9.611-9.611c.391-.391.903-.586 1.415-.586s1.023.195 1.414.586L32 19.559 49.705 1.855c.39-.391.902-.586 1.414-.586Z" />
+          </svg>
+          <svg class="menu__mark-image game__turn-img hidden" id="o-turn-img" viewBox="0 0 64 64">
+            <path
+              d="M33 1c17.673 0 32 14.327 32 32 0 17.673-14.327 32-32 32C15.327 65 1 50.673 1 33 1 15.327 15.327 1 33 1Zm0 18.963c-7.2 0-13.037 5.837-13.037 13.037 0 7.2 5.837 13.037 13.037 13.037 7.2 0 13.037-5.837 13.037-13.037 0-7.2-5.837-13.037-13.037-13.037Z" />
+          </svg>
+          <span>Turn</span>
+        </div>
+
+
+        <div class="game__restart-container">
+          <button type="button" class="game__restart" id="restart-game-btn">
+            <img src="./starter-code/assets/icon-restart.svg" alt="">
+          </button>
+        </div>
+
+      </header>
+      <section class="game__board" id="game-board">
+        <button type="button" class="game__cell" aria-label="Top left cell, empty"></button>
+        <button type="button" class="game__cell" aria-label="Top middle cell, empty"></button>
+        <button type="button" class="game__cell" aria-label="Top right cell, empty"></button>
+        <button type="button" class="game__cell" aria-label="Middle left cell, empty"></button>
+        <button type="button" class="game__cell" aria-label="Center cell, empty"></button>
+        <button type="button" class="game__cell" aria-label="Middle right cell, empty"></button>
+        <button type="button" class="game__cell" aria-label="Bottom left cell, empty"></button>
+        <button type="button" class="game__cell" aria-label="Bottom middle cell, empty"></button>
+        <button type="button" class="game__cell" aria-label="Bottom right cell, empty"></button>
+      </section>
+      <footer class="game__scoreboard">
+        <div class="game__score game__score--player">
+          <p class="game__score-label">X <span id="x-player"></span></p>
+          <p class="game__score-value" id="x-wins">0</p>
+
+        </div>
+        <div class="game__score game__score--ties">
+          <p class="game__score-label">Ties</p>
+          <p class="game__score-value" id="ties">0</p>
+        </div>
+        <div class="game__score game__score--cpu">
+          <p class="game__score-label">O <span id="o-player"></span></p>
+          <p class="game__score-value" id="o-wins">0</p>
+        </div>
+      </footer>
+
+      <div class="game-modal game-modal--restart hidden" id="restart-menu">
+        <h2 class="game-modal__title" id="game-modal-title">Restart game?</h2>
+        <div class="game-modal__buttons">
+          <button type="button" class="btn btn--slate" id="restart-game-cancel-btn">No,
+            cancel</button>
+          <button type="button" class="btn btn--amber" id="restart-game-confirm-btn">Yes,
+            restart</button>
+        </div>
+      </div>
+      <div class="game-modal game-modal--round hidden" id="end-round-menu">
+        <p class="game-modal__message" id="end-round-message"></p>
+        <h2 class="game-modal__title game-modal__title--x hidden" id="x-won-title">
+          <img src="./starter-code/assets/icon-x.svg" class="game-modal__img--x" alt="">
+          <span>Takes round</span>
+        </h2>
+        <h2 class=" game-modal__title game-modal__title--o hidden" id="o-won-title">
+          <img src="./starter-code/assets/icon-o.svg" class="game-modal__img--o" alt="">
+          <span>Takes round</span>
+        </h2>
+        <h2 class="game-modal__title hidden" id="tie-title">Round tied</h2>
+        <div class="game-modal__buttons">
+          <button type="button" class="btn btn--slate btn--quit" id="quit-btn">quit</button>
+          <button type="button" class="btn btn--amber btn--next-round" id="next-round-btn">next
+            round</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Game board end -->
+  <script src="app.js"></script>
+</body>
+
+</html>
