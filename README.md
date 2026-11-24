@@ -27,12 +27,12 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./screenshot.png)
 
 ### Links
 
-- Solution URL: [Github](https://github.com/artemkotko14/body-mass-index-calculator)
-- Live Site URL: [Website](https://artemkotko14.github.io/body-mass-index-calculator/)
+- Solution URL: [Github](https://github.com/artemkotko14/tic-tac-toe)
+- Live Site URL: [Website](https://artemkotko14.github.io/tic-tac-toe/)
 
 ## My process
 
