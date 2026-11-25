@@ -561,6 +561,10 @@ function loadGame() {
   endRoundMessage.innerHTML = savedGame.endRoundMessageText;
 
   gameCells.forEach((cell, index) => {
+    cell.setAttribute(
+      "aria-label",
+      cell.getAttribute("aria-label").replace(/, (empty|X|O)$/, ", empty"),
+    );
     if (xArray.includes(index)) {
       cell.classList.add("game__cell--x");
       cell.setAttribute(
