@@ -563,11 +563,17 @@ function loadGame() {
   gameCells.forEach((cell, index) => {
     if (xArray.includes(index)) {
       cell.classList.add("game__cell--x");
-      cell.setAttribute("aria-label", `${cell.getAttribute("aria-label")}, X`);
+      cell.setAttribute(
+        "aria-label",
+        cell.getAttribute("aria-label").replace(", empty", ", X"),
+      );
       cell.classList.add("game__cell--taken");
     } else if (oArray.includes(index)) {
       cell.classList.add("game__cell--o");
-      cell.setAttribute("aria-label", `${cell.getAttribute("aria-label")}, O`);
+      cell.setAttribute(
+        "aria-label",
+        cell.getAttribute("aria-label").replace(", empty", ", O"),
+      );
       cell.classList.add("game__cell--taken");
     }
   });
